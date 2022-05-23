@@ -17,7 +17,7 @@ import Header from '../../components/Header';
 import { Feather } from '@expo/vector-icons';
 import SliderItem from '../../components/SliderItem';
 import api, { key } from '../../services/api';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 
 function Home() {
@@ -28,6 +28,7 @@ function Home() {
     const [topMovies, setTopMovies] = useState([]);
     const [bannerMovie, setBannnerMovie] = useState({});
     const [loading, setLoading] = useState(true);
+    const [input, setInput] = useState('');
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -77,13 +78,17 @@ function Home() {
             isActive = false;
             ac.abort();
         }
-
-
-
     },[])
 
     function navigateDetailsPage(item){
         navigation.navigate('Detail', {id: item.id})
+    }
+
+    function handleSearchMovie(){
+        if(input === '') return;
+        
+        navigation.navigate('Search', {name: input })
+        setInput('');
     }
 
     if(loading){
@@ -98,8 +103,10 @@ function Home() {
                 <Input
                     placeholder="Halo"
                     placeholderTextColor="#ddd"
+                    value={input}
+                    onChangeText={(text) => setBannnerMovie(text)}
                 />
-                <SearchButton>
+                <SearchButton onPress={ handleSearchMovie }>
                     <Feather name="search" size={30} color="#FFF" />
                 </SearchButton>
             </SearchContainer>
@@ -109,7 +116,6 @@ function Home() {
                 <BannerButton activeOpacity={0.7} onPress={() => navigateDetailsPage(bannerMovie)}>
                     <Banner
                         resizeMethodod="resize"
-                        //https://images.unsplash.com/photo-1652752761132-73b207ab32fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80
                         source={{ uri: `https://image.tmdb.org/t/p/original/${bannerMovie.poster_path}` }}
                     />
                 </BannerButton>
@@ -147,3 +153,5 @@ function Home() {
 export default Home;
 
 // instalei : Axios, Stars
+
+// parei no minuto 43

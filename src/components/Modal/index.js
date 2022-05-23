@@ -1,19 +1,19 @@
 import React from 'react';
 import { BackButton, Name } from './styles'
 import { WebView } from 'react-native-webview';
-import {Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
-function ModalLink(Link, title, closeModal) {
+function ModalLink({link, title, closeModal}) {
     return (
         <>
             
                 <BackButton onPress={closeModal}>
                     <Feather name="x" size={35} color="#FFF" />
-                    <Name>{title}</Name>
+                    <Name numberOfLines={1}>{title}</Name>
                 </BackButton>
 
                 <WebView
-                    source={{ uri: Link }}
+                    source={{ uri: link }}
                 />
             
         </>
@@ -21,4 +21,4 @@ function ModalLink(Link, title, closeModal) {
     )
 }
 
-export default ModalLink;
+export default ModalLink; 

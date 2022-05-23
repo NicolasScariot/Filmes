@@ -99,6 +99,7 @@ function Detail() {
                 <Title>Descrição</Title>
                 <Description>{movie?.overview}</Description>
             </ScrollView>
+
             <Modal animationType="slide" visible={openLink}>
                 <ModalLink 
                 link={movie?.homepage}
@@ -111,5 +112,4 @@ function Detail() {
 }
 
 
-export default Detail;
-
+export default Detail; 
